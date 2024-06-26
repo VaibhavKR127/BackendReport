@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Company } from '../commom/company';
+import { Company } from '../common/company';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class CompanyService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getCompaniesPaginate(): Observable<Company[]> {
+  getCompanies(): Observable<Company[]> {
                   
     return this.httpClient.get<GetResponse>(this.baseUrl).pipe(
       map(response => response._embedded.company)
@@ -23,6 +23,12 @@ export class CompanyService {
   // private getCompanies(searchUrl: string): Observable<Company[]> {
   //   return this.httpClient.get<GetResponse>(this.baseUrl).pipe(map(response => response._embedded.companies));
   // }
+
+  addCompany(company :any){
+    //return this.httpclient.post('${baseURL}/company/list',company);
+    return this.httpClient.post(this.baseUrl,company)
+  }
+
 }
 
 

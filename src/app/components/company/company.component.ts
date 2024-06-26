@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Company } from 'src/app/commom/company';
+import { Company } from 'src/app/common/company';
 import { CompanyService } from 'src/app/services/company.service';
 
 @Component({
@@ -15,19 +15,17 @@ export class CompanyComponent {
   theTotalElements: number = 0;
   companies: Company[] = [];
 
-  newcompany: any = {};
+  newCompany : Company = new Company();
   showForm: boolean = false;
 
 constructor(private compserv:CompanyService, private router: Router,private route: ActivatedRoute ){}
 
   
   ngOnInit(): void {
-    
       this.getCompanies();
-      this.hello();
   }
   getCompanies() {
-    this.compserv.getCompaniesPaginate().subscribe(
+    this.compserv.getCompanies().subscribe(
       data => {
         //console.log('Companies=' + JSON.stringify(data));
         this.companies = data;
@@ -37,9 +35,7 @@ constructor(private compserv:CompanyService, private router: Router,private rout
     
   }
 
-  hello(){
-    console.log(this.companies);
-  }
+ 
 
   processResult() {
     return (data: any) => {
@@ -51,22 +47,28 @@ constructor(private compserv:CompanyService, private router: Router,private rout
   }
 
 
-  addcompany(){
-    this.showForm = false;
+  addCompanyForm(){
+    this.showForm = true;
   }
-  // addNewCompany(){
-  //   return this.compserv.AddCompany(this.newcompany).subscribe((data:any)=>
-  //   {
-  //     //console.log(data);
-  //     this.newcompany={};
-  //     this.router.navigate(['/show-company']);
-  //     this.ngOnInit();
+
+  addNewCompany(){
+    return this.compserv.addCompany(this.newCompany).subscribe((data:any)=>
+    {
+      //console.log(data);
+      this.newCompany=new Company();
+      //this.router.navigate(['/show-company']);
+      this.ngOnInit();
       
-  //   })
-  // }
+    })
+  }
 
   cancelAddCompany() {
-    this.newcompany = {}; // Reset the newcategory object
+    this.newCompany = new Company(); // Reset the newcategory object
     this.showForm = false; // Hide the form
+  }
+
+  editCompany(company:Company){
+    this.showForm=true;
+    this.newCompany = company;
   }
 }

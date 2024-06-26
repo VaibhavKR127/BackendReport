@@ -1,12 +1,12 @@
 <!-- "@angular/material/prebuilt-themes/indigo-pink.css", -->
 
-<!-- <div class="container">
+<div class="container">
     <br>
     <br>
     <h2 style="text-align: center;">Companies</h2>
 
-    <button (click)="addcomp()" class="btn btn-primary">Add Company</button><br>
-    <br>-->
+    <button (click)="addCompanyForm()" class="btn btn-primary">Add Company</button><br>
+    <br>
     <div class="container">
     <table class="table table-condensed table-stripped table-bordered table-hover">
     <thead>
@@ -21,8 +21,8 @@
             <td>{{c.cid}}</td>
             <td>{{c.cname}}</td>
             <td>
-                <!-- <button (click)="delCompany(c.cid)" class="btn btn-danger" id="deleteBtn" style="background-color: crimson;">Delete</button>
-                <button (click)="editCompany(c)" class="btn btn-primary" id="editBtn">Edit</button> -->
+               <!--  <button (click)="delCompany(c.cid)" class="btn btn-danger" id="deleteBtn" style="background-color: crimson;">Delete</button>-->
+                <button (click)="editCompany(c)" class="btn btn-primary" id="editBtn">Edit</button> 
             </td>
         </tr>
     </tbody>
@@ -42,16 +42,16 @@
 </div> -->
 
 
-<!-- <div class="container">
+<div class="container">
     <br>
     <br>
-    <form  (submit)="addNewCompany()" id="addCompanyForm">
+    <form *ngIf="showForm" (submit)="addNewCompany()" id="addCompanyForm">
         <h2 style="text-align: center;">Add New Company</h2>
         <label>Company Name:</label>
-        <input [(ngModel)]="newcompany.cname" name="name" type="text" class="form-control"><br>
+        <input [(ngModel)]="newCompany.cname" name="name" type="text" class="form-control"><br>
     
         <button type="submit" class="btn btn-primary btn-md" >Add Company</button>
         <button type="button" class="btn btn-danger" (click)="cancelAddCompany()"
             style="margin-left: 5px; background-color: crimson;">Cancel</button>
     </form>
-    </div> -->
+    </div>
